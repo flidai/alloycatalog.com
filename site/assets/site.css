@@ -377,6 +377,7 @@ h1 .line { display: block; padding-bottom: 0.04em; }
 .layer-items { display: flex; flex-wrap: wrap; gap: 8px; }
 .layer-items span { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line-2); background: rgb(6 18 31 / 0.6); font-size: 14px; font-weight: 500; }
 .layer-apps .layer-items span { border-style: dashed; color: var(--muted); }
+.layer-src .hero-src { border-color: rgb(127 182 238 / 0.6); color: var(--c1); background: rgb(127 182 238 / 0.1); }
 .layer-src .next { color: var(--faint); border-style: dashed; }
 .layer-src .live { width: 7px; height: 7px; }
 .layer-core { display: flex; align-items: center; gap: 22px; padding: 28px; border-color: rgb(127 182 238 / 0.55); background: radial-gradient(ellipse at 0% 50%, rgb(61 143 219 / 0.25), transparent 60%), rgb(10 27 46 / 0.9); box-shadow: 0 0 60px -10px rgb(61 143 219 / 0.45); }
