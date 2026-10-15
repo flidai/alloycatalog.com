@@ -412,6 +412,16 @@ h1 .line { display: block; padding-bottom: 0.04em; }
   .thread .bubble { max-width: 100%; }
 }
 
+/* Pilot */
+.pilot-lead { margin: -24px 0 48px; max-width: 46em; }
+.pilot { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.pilot li { position: relative; padding: 28px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--panel); }
+.pilot li .mono { color: var(--accent); font-size: 13px; }
+.pilot h3 { font-size: 22px; margin: 12px 0 8px; }
+.pilot p { color: var(--muted); }
+.pilot li:not(:last-child)::after { content: "→"; position: absolute; right: -15px; top: 50%; translate: 0 -50%; z-index: 1; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--bg); border: 1px solid var(--line-2); color: var(--accent); font-size: 14px; }
+@media (max-width: 900px) { .pilot { grid-template-columns: 1fr; } .pilot li:not(:last-child)::after { right: 50%; top: auto; bottom: -15px; translate: 50% 0; content: "↓"; } }
+
 /* Scroll reveal (site.js adds .in). Without JavaScript everything is visible. */
 .js [data-reveal] { opacity: 0; transform: translateY(32px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); transition-delay: var(--d, 0s); }
 .js [data-reveal].in { opacity: 1; transform: none; }
