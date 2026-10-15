@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alloy Catalog: engineering master data with a built-in AI agent</title>
+  <meta name="description" content="Alloy Catalog fuses CAD models, drawings, BOMs and ERP data into one page per part number, with an AI agent that answers questions about your products and cites its sources.">
+  <link rel="canonical" href="https://alloycatalog.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alloycatalog.com/">
+  <meta property="og:title" content="Alloy Catalog: every part, every source, one catalog">
+  <meta property="og:description" content="Engineering master data with a built-in AI agent. CAD, drawings, BOM and ERP fused into one page per part number.">
+  <meta property="og:image" content="https://alloycatalog.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111113" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/" aria-label="Alloy Catalog home">
+        <picture>
+          <source srcset="/brand/lockup-on-dark.svg" media="(prefers-color-scheme: dark)">
+          <img src="/brand/lockup-on-light.svg" alt="Alloy Catalog" width="172" height="30">
+        </picture>
+      </a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#trust">Security</a>
+      </nav>
+      <a class="btn btn-primary btn-sm" href="mailto:jacob@flid.ai?subject=Alloy%20Catalog%20demo">Book a demo</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Engineering master data with a built-in AI agent</p>
+          <h1><span class="line">Every part.</span> <span class="line">Every source.</span> <span class="accent">One catalog.</span></h1>
+          <p class="lead">Alloy Catalog fuses your CAD models, drawings, bills of materials and ERP data into one page per part number. Its AI agent answers questions about your products and cites the files and records it used.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="mailto:jacob@flid.ai?subject=Alloy%20Catalog%20demo">See it on your data</a>
+            <a class="btn btn-ghost" href="#how">How it works</a>
+          </div>
+          <ul class="hero-points">
+            <li>Read-only on your CAD files and ERP</li>
+            <li>Every fact shows its source</li>
+            <li>Data stored in the EU</li>
+          </ul>
+        </div>
+
+        <figure class="mock" aria-label="Illustration of an Alloy Catalog item page with the AI agent">
+          <div class="mock-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="mock-url">acme.alloycatalog.com/item/AC-40120</span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-item">
+              <div class="mock-head">
+                <div class="mock-thumb" aria-hidden="true">
+                  <svg viewBox="0 0 120 90"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M20 58 L60 78 L100 58 L100 34 L60 14 L20 34 Z"/><path d="M20 34 L60 54 L100 34 M60 54 L60 78"/><ellipse cx="60" cy="34" rx="16" ry="8"/><path d="M44 34 v-8 M76 34 v-8"/><ellipse cx="60" cy="26" rx="16" ry="8"/></g></svg>
+                </div>
+                <div>
+                  <p class="mono muted small">AC-40120 · Rev C</p>
+                  <p class="mock-title">Gear housing, cast</p>
+                  <p class="chips"><span class="chip">Housings</span><span class="chip">Active in ERP</span></p>
+                </div>
+              </div>
+              <dl class="facts">
+                <div><dt>Material <span class="src">ipt</span></dt><dd>EN-GJS-400-15</dd></div>
+                <div><dt>Mass <span class="src">ipt</span></dt><dd>18.4 kg</dd></div>
+                <div><dt>Drawing <span class="src">idw</span></dt><dd class="mono">AC-40120.idw</dd></div>
+                <div><dt>Stock <span class="src">ERP</span></dt><dd>14 pcs</dd></div>
+              </dl>
+              <div class="tabs" aria-hidden="true"><span class="on">Where used</span><span>BOM</span><span>Files</span><span>ERP</span><span>History</span></div>
+              <ul class="rows">
+                <li><span class="mono">AC-90010</span><span>Gearbox 40 kW</span><span class="muted">qty 1</span></li>
+                <li><span class="mono">AC-90012</span><span>Gearbox 55 kW</span><span class="muted">qty 1</span></li>
+                <li><span class="mono">AC-90300</span><span>Drive unit, complete</span><span class="muted">qty 2</span></li>
+              </ul>
+            </div>
+            <div class="mock-agent">
+              <p class="agent-label">Ask</p>
+              <p class="bubble you">Which assemblies use AC-40120, and do we have it in stock?</p>
+              <p class="bubble ai">It is used in three assemblies: <span class="nw">Gearbox 40 kW <a class="cite">1</a></span>, <span class="nw">Gearbox 55 kW <a class="cite">2</a></span> and the complete <span class="nw">drive unit <a class="cite">3</a></span>. The ERP shows <span class="nw">14 in stock <a class="cite">4</a></span>.</p>
+              <p class="agent-input">Ask about any part…</p>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap">
+        <h2 class="section-title">Your product knowledge is spread everywhere</h2>
+        <div class="grid-3">
+          <article class="card">
+            <h3>In CAD files</h3>
+            <p>Hundreds of thousands of parts, assemblies and drawings on a file share or in a vault. Searchable by file name, if you know it.</p>
+          </article>
+          <article class="card">
+            <h3>In the ERP</h3>
+            <p>Item numbers, stock, prices and suppliers, kept apart from the models and drawings that define the parts.</p>
+          </article>
+          <article class="card">
+            <h3>In people's heads</h3>
+            <p>Which variant is current, where a part is used, who designed it. The answers leave when people do.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <div class="wrap">
+        <p class="eyebrow">How it works</p>
+        <h2 class="section-title">An alloy of your engineering data</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-n">1</span>
+            <h3>Connect, read-only</h3>
+            <p>Alloy Catalog reads your CAD files and ERP data. It never changes a CAD file.</p>
+          </li>
+          <li>
+            <span class="step-n">2</span>
+            <h3>Extract</h3>
+            <p>Properties, parameters, materials, mass, previews, BOMs, assembly structure, drawing title blocks and parts lists.</p>
+          </li>
+          <li>
+            <span class="step-n">3</span>
+            <h3>Fuse</h3>
+            <p>One record per part number. Every fact keeps its source, gaps stay empty instead of guessed, and conflicts between sources are flagged.</p>
+          </li>
+          <li>
+            <span class="step-n">4</span>
+            <h3>Find, ask, build</h3>
+            <p>Search and browse, ask the AI agent, or connect your own tools and agents through the API.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="features" class="section section-alt">
+      <div class="wrap">
+        <p class="eyebrow">Features</p>
+        <h2 class="section-title">Built around the part number</h2>
+        <div class="grid-3 features">
+          <article class="card">
+            <h3>One page per item</h3>
+            <p>Preview, key facts, BOM, where-used, drawings, files, revisions and ERP data on a single page, each fact linked to the file or record it came from.</p>
+          </article>
+          <article class="card">
+            <h3>Search that understands structure</h3>
+            <p>Facets, numeric ranges and relation filters such as "used in an assembly that…", plus a command palette for jumping straight to any part.</p>
+          </article>
+          <article class="card">
+            <h3>An AI agent that cites</h3>
+            <p>Ask in your own language. The agent finds, counts and compares across the whole catalog and links every part and document it mentions.</p>
+          </article>
+          <article class="card">
+            <h3>Clean master data</h3>
+            <p>Classes based on ISO 14224, IEC 81346 and ECLASS, typed attributes with completeness, tags and shared lists. Similar parts and variants are linked automatically.</p>
+          </article>
+          <article class="card">
+            <h3>Open to your tools</h3>
+            <p>A JSON API, exports and an MCP server let your own applications and AI agents read the catalog under the same access rules as your users.</p>
+          </article>
+          <article class="card">
+            <h3>Your catalog, your brand</h3>
+            <p>Each customer gets their own address, such as <span class="mono">acme.alloycatalog.com</span>, with their own name, logo and accent colour.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">Performance</p>
+          <h2 class="section-title">Fast on real catalogs</h2>
+          <p class="lead">Built in Rust and measured against production-size catalogs of hundreds of thousands of CAD files. Every page has a latency budget, and the test suite fails when one is broken.</p>
+        </div>
+        <dl class="stats">
+          <div><dt>≤ 200 ms</dt><dd>page load at the 95th percentile</dd></div>
+          <div><dt>≤ 50 ms</dt><dd>median read time</dd></div>
+          <div><dt>100k+</dt><dd>CAD files per catalog</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="trust" class="section section-alt">
+      <div class="wrap">
+        <p class="eyebrow">Security and trust</p>
+        <h2 class="section-title">Your data stays yours</h2>
+        <div class="grid-2">
+          <ul class="checks">
+            <li><strong>Read-only.</strong> Alloy Catalog never writes to your CAD files or ERP.</li>
+            <li><strong>Provenance on every fact.</strong> You can always see which file or record a value came from.</li>
+            <li><strong>Data stored in the EU.</strong></li>
+          </ul>
+          <ul class="checks">
+            <li><strong>Single sign-on</strong> with Microsoft Entra ID, with roles for readers and reviewers.</li>
+            <li><strong>Private AI.</strong> Model calls go to zero-data-retention endpoints, EU first. Your data is not used for training.</li>
+            <li><strong>Scoped access</strong> for API and agent integrations.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <p class="eyebrow">Works with</p>
+        <h2 class="section-title">Starts with what you have</h2>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Today</h3>
+            <p>Autodesk Inventor parts, assemblies, drawings and presentations on a file share. NetSuite as the ERP source.</p>
+          </article>
+          <article class="card">
+            <h3>Next</h3>
+            <p>An Autodesk Vault connector, near-real-time sync, and more CAD and ERP sources, all feeding the same catalog.</p>
+          </article>
+        </div>
+        <p class="note">With clean master data in place, applications such as spare-parts portals, sales configurators and routing can be built on top.</p>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap cta-inner">
+        <h2>See your own parts in Alloy Catalog</h2>
+        <p>We connect read-only to your data and show you your catalog, your BOMs and the agent answering questions about your products.</p>
+        <a class="btn btn-primary" href="mailto:jacob@flid.ai?subject=Alloy%20Catalog%20demo">Book a demo</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <picture>
+        <source srcset="/brand/lockup-on-dark.svg" media="(prefers-color-scheme: dark)">
+        <img src="/brand/lockup-on-light.svg" alt="Alloy Catalog" width="138" height="24">
+      </picture>
+      <p>A product by <a href="https://flid.ai">Flid</a>. © 2026 Flid.</p>
+      <p><a href="mailto:jacob@flid.ai">jacob@flid.ai</a></p>
+    </div>
+  </footer>
+</body>
+</html>
