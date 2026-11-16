@@ -92,7 +92,7 @@ if (demo) {
     thread.innerHTML = `<p class="bubble you"></p>`;
     thread.firstChild.textContent = q;
     if (reduced) { thread.insertAdjacentHTML('beforeend', `<p class="bubble ai">${a}</p>`); return; }
-    later(() => thread.insertAdjacentHTML('beforeend', '<p class="typing" style="display:flex"><span></span><span></span><span></span></p>'), 350);
+    later(() => thread.insertAdjacentHTML('beforeend', '<p class="typing show"><span></span><span></span><span></span></p>'), 350);
     later(() => { thread.querySelector('.typing')?.remove(); thread.insertAdjacentHTML('beforeend', `<p class="bubble ai">${a}</p>`);
       thread.querySelectorAll('.cite').forEach((c, n) => (c.style.animationDelay = `${0.25 + n * 0.18}s`)); }, 1500);
   };
