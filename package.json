@@ -6,10 +6,20 @@
     "node": ">=22"
   },
   "scripts": {
-    "start": "eleventy --serve",
-    "build": "eleventy"
+    "start": "npm run tokens && eleventy --serve",
+    "build": "npm run tokens && eleventy",
+    "validate": "html-validate \"_site/**/*.html\"",
+    "budget": "node scripts/budget.mjs",
+    "test": "playwright test",
+    "check": "npm run build && npm run validate && npm run budget && npm test",
+    "tokens": "node scripts/tokens.mjs",
+    "brand": "node scripts/brand-png.mjs"
   },
   "devDependencies": {
-    "@11ty/eleventy": "3.1.8"
+    "@11ty/eleventy": "3.1.8",
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.65.1",
+    "@resvg/resvg-js": "2.6.2",
+    "html-validate": "11.21.1"
   }
 }

@@ -46,7 +46,7 @@
       </nav>
       <details class="menu">
         <summary>Menu</summary>
-        <nav aria-label="Main">
+        <nav aria-label="Main menu">
 {%- for item in site.nav %}
           <a href="{{ "" if page.url == "/" else "/" }}{{ item.href }}">{{ item.label }}</a>
 {%- endfor %}
