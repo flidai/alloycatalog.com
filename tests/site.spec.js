@@ -4,9 +4,10 @@ import AxeBuilder from "@axe-core/playwright";
 const PAGES = ["/", "/privacy/", "/company/", "/404.html"];
 const WIDTHS = [375, 1440];
 
-// Collects console errors (including CSP violations) and uncaught exceptions.
+// Collects console errors (including CSP violations), uncaught exceptions and third-party requests.
 function watchErrors(page) {
   const errors = [];
+  page.on("request", (r) => { if (new URL(r.url()).host !== "127.0.0.1:4173") errors.push(`third-party request: ${r.url()}`); });
   page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
   page.on("pageerror", (e) => errors.push(e.message));
   return errors;
@@ -35,44 +36,80 @@ for (const path of PAGES) {
   }
 }
 
-test("tour tabs switch panels and the pause button works", async ({ page }) => {
-  const errors = watchErrors(page);
+// The tour dwells 8 s per tab; tests shorten it so they run fast and leave slack.
+async function openTour(page, dwell = "1s") {
   await page.goto("/");
   const demo = page.locator("[data-demo]");
+  // CSSOM writes are allowed by the CSP; a <style> tag would be blocked.
+  await demo.evaluate((el, value) => el.style.setProperty("--tour-dwell", value), dwell);
   await demo.scrollIntoViewIfNeeded();
+  return demo;
+}
+
+test("tour tabs switch panels by click and keyboard", async ({ page }) => {
+  const errors = watchErrors(page);
+  const demo = await openTour(page);
   for (const tab of await demo.getByRole("tab").all()) {
     await tab.click();
-    const panel = page.locator(`#${await tab.getAttribute("aria-controls")}`);
-    await expect(panel).toBeVisible();
+    await expect(page.locator(`#${await tab.getAttribute("aria-controls")}`)).toBeVisible();
     await expect(tab).toHaveAttribute("aria-selected", "true");
     await expect(demo.locator('[role="tabpanel"]:visible')).toHaveCount(1);
   }
-  // A tab click pauses autoplay; the button resumes and pauses it again.
-  const toggle = demo.getByRole("button", { name: /tour/ });
-  await expect(toggle).toHaveText("Play tour");
-  await expect(toggle).toHaveAttribute("aria-pressed", "true");
-  await toggle.click();
-  await expect(toggle).toHaveText("Pause tour");
-  await expect(toggle).toHaveAttribute("aria-pressed", "false");
-  await toggle.click();
-  await expect(toggle).toHaveText("Play tour");
+  await page.keyboard.press("Home");
+  await expect(page.locator("#t-find")).toBeFocused();
+  await expect(page.locator("#t-find")).toHaveAttribute("aria-selected", "true");
+  await page.keyboard.press("End");
+  await expect(page.locator("#t-clean")).toHaveAttribute("aria-selected", "true");
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator("#t-find")).toHaveAttribute("aria-selected", "true");
   expect(errors).toEqual([]);
 });
 
-test("tour advances on its own", async ({ page }) => {
-  await page.goto("/");
-  await page.locator("[data-demo]").scrollIntoViewIfNeeded();
+test("tour advances on its own and stays put while hovered", async ({ page }) => {
+  const demo = await openTour(page);
   await page.mouse.move(0, 0);
-  await expect(page.locator("#t-ask")).toHaveAttribute("aria-selected", "true", { timeout: 12_000 });
+  await expect(page.locator("#t-ask")).toHaveAttribute("aria-selected", "true", { timeout: 5_000 });
+  await demo.locator(".mock").hover();
+  const selected = await demo.locator('[aria-selected="true"]').getAttribute("id");
+  await page.waitForTimeout(2_500);
+  // Read once: a retrying assertion could pass when the tour wraps round to the same tab.
+  expect(await demo.locator('[aria-selected="true"]').getAttribute("id")).toBe(selected);
 });
 
-test("mobile menu opens and closes after a link is chosen", async ({ page }) => {
+test("pause and play buttons stop and resume the tour", async ({ page }) => {
+  const demo = await openTour(page);
+  const toggle = demo.getByRole("button", { name: /tour$/ });
+  await expect(toggle).toHaveText("Pause tour");
+  await toggle.click();
+  await expect(toggle).toHaveText("Play tour");
+  const selected = await demo.locator('[aria-selected="true"]').getAttribute("id");
+  await page.mouse.move(0, 0);
+  await page.waitForTimeout(2_500);
+  // Read once: a retrying assertion could pass when the tour wraps round to the same tab.
+  expect(await demo.locator('[aria-selected="true"]').getAttribute("id")).toBe(selected);
+  // Play resumes at once, with the pointer and focus still on the button.
+  await toggle.click();
+  await expect(toggle).toHaveText("Pause tour");
+  await expect(demo.locator('[aria-selected="true"]')).not.toHaveAttribute("id", selected, { timeout: 5_000 });
+});
+
+test("mobile menu opens, and closes on a link, Escape and a click outside", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 800 });
   await page.goto("/");
   await expect(page.locator(".nav-links")).toBeHidden();
   const menu = page.locator("details.menu");
-  await menu.locator("summary").click();
-  await expect(menu.getByRole("link", { name: "Security" })).toBeVisible();
+  const summary = menu.locator("summary");
+
+  await summary.click();
+  await page.keyboard.press("Escape");
+  await expect(menu).not.toHaveAttribute("open", "");
+  await expect(summary).toBeFocused();
+
+  await summary.click();
+  await page.locator("h1").click();
+  await expect(menu).not.toHaveAttribute("open", "");
+
+  await summary.click();
   await menu.getByRole("link", { name: "Security" }).click();
   await expect(menu).not.toHaveAttribute("open", "");
   await expect(page).toHaveURL(/#trust$/);

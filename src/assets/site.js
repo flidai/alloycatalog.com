@@ -91,10 +91,7 @@ if (demo) {
   const sync = () => {
     demo.classList.toggle('paused', holds.size > 0);
     demo.classList.toggle('auto', !holds.has('user'));
-    if (toggle) {
-      toggle.setAttribute('aria-pressed', String(holds.has('user')));
-      toggle.textContent = holds.has('user') ? 'Play tour' : 'Pause tour';
-    }
+    if (toggle) toggle.textContent = holds.has('user') ? 'Play tour' : 'Pause tour';
   };
   const hold = (reason, on) => { if (on) holds.add(reason); else holds.delete(reason); sync(); };
 
@@ -140,19 +137,24 @@ if (demo) {
 
   tabs.forEach((t, n) => t.addEventListener('click', () => { hold('user', true); show(n); }));
   demo.querySelector('[role="tablist"]').addEventListener('keydown', (e) => {
-    const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
-    if (!d) return;
-    const next = (current + d + tabs.length) % tabs.length;
+    const keys = { ArrowRight: current + 1, ArrowLeft: current - 1, Home: 0, End: tabs.length - 1 };
+    if (!(e.key in keys)) return;
+    e.preventDefault();
+    const next = (keys[e.key] + tabs.length) % tabs.length;
     hold('user', true); show(next); tabs[next].focus();
   });
   chips.forEach((c, n) => c.addEventListener('click', () => { hold('user', true); ask(n, true); }));
-  toggle?.addEventListener('click', () => hold('user', !holds.has('user')));
+  // Pressing Play means play now, even though the pointer and focus are on the button.
+  toggle?.addEventListener('click', () => {
+    if (holds.has('user')) { holds.delete('pointer'); holds.delete('focus'); }
+    hold('user', !holds.has('user'));
+  });
   for (const t of tabs) t.querySelector('.bar').addEventListener('animationend', () => {
     if (!holds.has('user')) show((current + 1) % tabs.length);
   });
   demo.addEventListener('pointerenter', () => hold('pointer', true));
   demo.addEventListener('pointerleave', () => hold('pointer', false));
-  demo.addEventListener('focusin', () => hold('focus', true));
+  demo.addEventListener('focusin', (e) => { if (e.target !== toggle) hold('focus', true); });
   demo.addEventListener('focusout', (e) => { if (!demo.contains(e.relatedTarget)) hold('focus', false); });
   new IntersectionObserver(([entry]) => {
     hold('offscreen', !entry.isIntersecting);
@@ -190,9 +192,15 @@ const idle = new IntersectionObserver((entries) => {
 for (const section of document.querySelectorAll('main > section')) idle.observe(section);
 document.addEventListener('visibilitychange', () => document.documentElement.classList.toggle('tab-hidden', document.hidden));
 
-// Mobile menu closes after a link is chosen.
+// Mobile menu closes after a link is chosen, on Escape and on a click outside it.
 const menu = document.querySelector('.menu');
-menu?.addEventListener('click', (event) => { if (event.target.closest('a')) menu.open = false; });
+if (menu) {
+  menu.addEventListener('click', (event) => { if (event.target.closest('a')) menu.open = false; });
+  document.addEventListener('click', (event) => { if (menu.open && !menu.contains(event.target)) menu.open = false; });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); }
+  });
+}
 
 // Tiles: a soft light follows the pointer.
 for (const card of document.querySelectorAll('.tile')) {

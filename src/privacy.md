@@ -7,11 +7,11 @@ updated: 2026-11-16
 ---
 # Privacy
 
-This notice covers the website alloycatalog.com. It does not cover the Alloy Catalog product, which has its own terms for customers.
+This notice covers the website alloycatalog.com, not the Alloy Catalog product.
 
 ## Who is responsible
 
-{{ site.company.legalName }}, CVR {{ site.company.cvr }}, {{ site.company.city }}, {{ site.company.country }}. Contact: [{{ site.email }}](mailto:{{ site.email }}).
+{{ site.company.legalName }}, CVR {{ site.company.cvr }}, {{ site.company.street }}, {{ site.company.postalCode }} {{ site.company.city }}, {{ site.company.country }}. Contact: [{{ site.email }}](mailto:{{ site.email }}).
 
 ## What this website does not do
 

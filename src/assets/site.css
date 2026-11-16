@@ -272,12 +272,13 @@ h1 .line { display: block; padding-bottom: 0.04em; }
 .demo-tabs button[aria-selected="true"] .mono { color: var(--accent); }
 .demo-tabs .bar { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 .demo-tabs button[aria-selected="true"] .bar { width: 100%; }
-.demo.auto .demo-tabs button[aria-selected="true"] .bar { width: 0; animation: tour-progress 8s linear forwards; }
-.demo.paused .demo-tabs .bar { animation-play-state: paused; }
+.demo { --tour-dwell: 8s; }
+.demo.auto .demo-tabs button[aria-selected="true"] .bar { width: 0; animation: tour-progress var(--tour-dwell) linear forwards; }
+.demo.auto.paused .demo-tabs button[aria-selected="true"] .bar { animation-play-state: paused; }
 @keyframes tour-progress { to { width: 100%; } }
-.demo-toggle { margin-left: auto; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; background: none; color: var(--muted); font: 500 12px/1.4 var(--sans); cursor: pointer; }
+.demo-toggle { display: none; margin-left: auto; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; background: none; color: var(--muted); font: 500 12px/1.4 var(--sans); cursor: pointer; }
 .demo-toggle:hover { color: var(--text); border-color: var(--line-2); }
-@media (scripting: none) { .demo-toggle { display: none; } }
+.demo.auto .demo-toggle, .demo.paused .demo-toggle { display: block; }
 .panel { min-height: 400px; }
 .panel:not([hidden]) { animation: panel-in 0.45s var(--ease); }
 @keyframes panel-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }

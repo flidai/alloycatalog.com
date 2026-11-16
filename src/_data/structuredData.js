@@ -11,7 +11,13 @@ export default {
       url: site.company.url,
       logo: `${site.url}/apple-touch-icon.png`,
       email: site.email,
-      address: { "@type": "PostalAddress", addressLocality: site.company.city, addressCountry: site.company.countryCode },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: site.company.street,
+        postalCode: site.company.postalCode,
+        addressLocality: site.company.city,
+        addressCountry: site.company.countryCode,
+      },
     },
     { "@type": "WebSite", "@id": `${site.url}/#website`, url: `${site.url}/`, name: site.name, publisher: { "@id": `${site.url}/#org` } },
     {

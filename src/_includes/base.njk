@@ -12,9 +12,13 @@
 {%- endif %}
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
+{%- if not robots %}
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+{%- endif %}
   <meta property="og:type" content="website">
+{%- if not robots %}
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+{%- endif %}
   <meta property="og:title" content="{{ ogTitle or title }}">
   <meta property="og:description" content="{{ ogDescription or description }}">
   <meta property="og:image" content="{{ site.url }}/assets/og.png">

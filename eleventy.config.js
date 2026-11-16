@@ -6,7 +6,7 @@ export default function (config) {
     "src/assets": "assets",
     "src/.nojekyll": ".nojekyll",
     "src/CNAME": "CNAME",
-    "src/favicon.svg": "favicon.svg",
+    "brand/favicon.svg": "favicon.svg",
     "src/favicon-32.png": "favicon-32.png",
     "src/apple-touch-icon.png": "apple-touch-icon.png",
     "brand/lockup-on-dark.svg": "brand/lockup-on-dark.svg",
