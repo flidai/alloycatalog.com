@@ -5,7 +5,6 @@ export default function (config) {
   config.addPassthroughCopy({
     "src/assets": "assets",
     "src/.nojekyll": ".nojekyll",
-    "src/CNAME": "CNAME",
     "brand/favicon.svg": "favicon.svg",
     "src/favicon-32.png": "favicon-32.png",
     "src/apple-touch-icon.png": "apple-touch-icon.png",

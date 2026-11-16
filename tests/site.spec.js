@@ -36,6 +36,30 @@ for (const path of PAGES) {
   }
 }
 
+for (const width of WIDTHS) {
+  test(`every tour panel at ${width}px has no serious axe issues`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    const demo = page.locator("[data-demo]");
+    await demo.scrollIntoViewIfNeeded();
+    // Without motion there is no autoplay, so no pause button either.
+    await expect(demo.locator(".demo-toggle")).toHaveCount(0);
+    for (const tab of await demo.getByRole("tab").all()) {
+      await tab.click();
+      const label = (await tab.textContent()).trim();
+      const { violations } = await new AxeBuilder({ page }).include("[data-demo]").withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
+      const serious = violations.filter((v) => ["serious", "critical"].includes(v.impact));
+      expect(serious.map((v) => `${label} ${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`)).toEqual([]);
+    }
+  });
+}
+
+test("CNAME matches the domain in site.json", async ({ request }) => {
+  const site = (await import("../src/_data/site.json", { with: { type: "json" } })).default;
+  expect((await (await request.get("/CNAME")).text()).trim()).toBe(site.domain);
+});
+
 // The tour dwells 8 s per tab; tests shorten it so they run fast and leave slack.
 async function openTour(page, dwell = "1s") {
   await page.goto("/");
@@ -77,9 +101,11 @@ test("tour advances on its own and stays put while hovered", async ({ page }) =>
 });
 
 test("pause and play buttons stop and resume the tour", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 800 });
   const demo = await openTour(page);
   const toggle = demo.getByRole("button", { name: /tour$/ });
   await expect(toggle).toHaveText("Pause tour");
+  expect((await toggle.boundingBox()).height).toBeLessThan(30); // one line, also on a phone
   await toggle.click();
   await expect(toggle).toHaveText("Play tour");
   const selected = await demo.locator('[aria-selected="true"]').getAttribute("id");

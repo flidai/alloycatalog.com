@@ -27,6 +27,6 @@ If you email us, for example to book a demo, we use your name, email address and
 
 ## Your rights
 
-You can ask for access to, correction or deletion of your personal data, ask us to restrict or stop using it, and ask for a copy in a portable format. Write to [{{ site.email }}](mailto:{{ site.email }}). You can also complain to the Danish Data Protection Agency, [Datatilsynet](https://www.datatilsynet.dk/).
+You can ask for access to, correction or deletion of your personal data, ask us to restrict how we use it, object to our use of it, and ask for a copy in a portable format (GDPR Articles 15 to 21). Write to [{{ site.email }}](mailto:{{ site.email }}). You can also complain to the Danish Data Protection Agency, [Datatilsynet](https://www.datatilsynet.dk/).
 
 Last updated {{ updated | isoDate }}.

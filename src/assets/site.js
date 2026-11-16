@@ -82,7 +82,9 @@ if (demo) {
   const chips = [...demo.querySelectorAll('.qchips button')];
   const query = demo.querySelector('.q');
   const hits = demo.querySelector('[data-hits]');
-  const toggle = demo.querySelector('.demo-toggle');
+  // Without motion there is no autoplay, so there is nothing to pause.
+  const toggle = reduced ? null : demo.querySelector('.demo-toggle');
+  if (reduced) demo.querySelector('.demo-toggle')?.remove();
   const holds = new Set(reduced ? ['user'] : []);
   let current = 0, started = false, timers = [];
   const later = (fn, ms) => timers.push(setTimeout(fn, ms));
