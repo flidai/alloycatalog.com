@@ -65,12 +65,14 @@ if (mock && !reduced) {
   tilt();
 }
 
-// Product tour: four task tabs that advance on their own until someone clicks.
+// Product tour: four task tabs that advance on their own until someone clicks a tab or presses
+// Pause. The progress bar is a CSS animation; when it ends, the next tab shows. Autoplay also
+// pauses while the pointer or keyboard focus is in the tour, and while it is off-screen.
 const ANSWERS = [
-  ['Which assemblies use AC-40120?', 'AC-40120 is used in three assemblies: <span class="nw">Gearbox 40 kW <a class="cite">1</a></span>, <span class="nw">Gearbox 55 kW <a class="cite">2</a></span> and the complete <span class="nw">drive unit <a class="cite">3</a></span>. The ERP shows <span class="nw">14 in stock <a class="cite">4</a></span>.'],
-  ['Do we already have a housing like this?', 'Yes. AC-40122 has the same bore and bolt pattern and differs only in wall thickness <a class="cite">1</a>. AC-40130 is a close variant already used in <span class="nw">five assemblies <a class="cite">2</a></span>.'],
-  ['Who knows the 55 kW gearbox best?', 'KL designed most of it: their initials are on 9 of its 14 drawings <a class="cite">1</a>. MH made the latest changes, in <span class="nw">March <a class="cite">2</a></span>.'],
-  ['Does the drawing match the ERP?', 'Not quite. The drawing is at revision C <a class="cite">1</a>, but the ERP item still lists <span class="nw">revision B <a class="cite">2</a></span>. The mismatch is flagged on the item page.'],
+  ['Which assemblies use AC-40120?', 'AC-40120 is used in three assemblies: <span class="nw">Gearbox 40 kW <span class="cite">1</span></span>, <span class="nw">Gearbox 55 kW <span class="cite">2</span></span> and the complete <span class="nw">drive unit <span class="cite">3</span></span>. The ERP shows <span class="nw">14 in stock <span class="cite">4</span></span>.'],
+  ['Do we already have a housing like this?', 'Yes. AC-40122 has the same bore and bolt pattern and differs only in wall thickness <span class="cite">1</span>. AC-40130 is a close variant already used in <span class="nw">five assemblies <span class="cite">2</span></span>.'],
+  ['Who knows the 55 kW gearbox best?', 'KL designed most of it: their initials are on 9 of its 14 drawings <span class="cite">1</span>. MH made the latest changes, in <span class="nw">March <span class="cite">2</span></span>.'],
+  ['Does the drawing match the ERP?', 'Not quite. The drawing is at revision C <span class="cite">1</span>, but the ERP item still lists <span class="nw">revision B <span class="cite">2</span></span>. The mismatch is flagged on the item page.'],
 ];
 const demo = document.querySelector('[data-demo]');
 if (demo) {
@@ -80,16 +82,28 @@ if (demo) {
   const chips = [...demo.querySelectorAll('.qchips button')];
   const query = demo.querySelector('.q');
   const hits = demo.querySelector('[data-hits]');
-  let current = 0, auto = !reduced, visible = false, started = 0, timers = [];
-  const DWELL = 8000;
+  const toggle = demo.querySelector('.demo-toggle');
+  const holds = new Set(reduced ? ['user'] : []);
+  let current = 0, started = false, timers = [];
   const later = (fn, ms) => timers.push(setTimeout(fn, ms));
   const clearTimers = () => { timers.forEach(clearTimeout); timers = []; };
 
-  const ask = (i) => {
+  const sync = () => {
+    demo.classList.toggle('paused', holds.size > 0);
+    demo.classList.toggle('auto', !holds.has('user'));
+    if (toggle) {
+      toggle.setAttribute('aria-pressed', String(holds.has('user')));
+      toggle.textContent = holds.has('user') ? 'Play tour' : 'Pause tour';
+    }
+  };
+  const hold = (reason, on) => { if (on) holds.add(reason); else holds.delete(reason); sync(); };
+
+  const ask = (i, fromUser) => {
     clearTimers();
+    thread.setAttribute('aria-live', fromUser ? 'polite' : 'off');
     chips.forEach((c, n) => c.setAttribute('aria-pressed', String(n === i)));
     const [q, a] = ANSWERS[i];
-    thread.innerHTML = `<p class="bubble you"></p>`;
+    thread.innerHTML = '<p class="bubble you"></p>';
     thread.firstChild.textContent = q;
     if (reduced) { thread.insertAdjacentHTML('beforeend', `<p class="bubble ai">${a}</p>`); return; }
     later(() => thread.insertAdjacentHTML('beforeend', '<p class="typing show"><span></span><span></span><span></span></p>'), 350);
@@ -108,7 +122,7 @@ if (demo) {
     later(() => { hits.textContent = '37'; query.classList.remove('typing-q'); panel.classList.add('play'); }, done + 150);
   };
 
-  const show = (i, fromUser) => {
+  const show = (i) => {
     clearTimers();
     current = i;
     tabs.forEach((t, n) => {
@@ -120,52 +134,65 @@ if (demo) {
     url.textContent = tabs[i].dataset.url;
     const panel = document.getElementById(tabs[i].getAttribute('aria-controls'));
     if (panel.id === 'p-find') playSearch(panel);
-    else if (panel.id === 'p-ask') ask(0);
+    else if (panel.id === 'p-ask') ask(0, false);
     else { panel.classList.remove('play'); requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('play'))); }
-    if (fromUser) { auto = false; demo.style.setProperty('--progress', '100%'); }
-    started = performance.now();
   };
 
-  tabs.forEach((t, n) => t.addEventListener('click', () => show(n, true)));
+  tabs.forEach((t, n) => t.addEventListener('click', () => { hold('user', true); show(n); }));
   demo.querySelector('[role="tablist"]').addEventListener('keydown', (e) => {
     const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
     if (!d) return;
     const next = (current + d + tabs.length) % tabs.length;
-    show(next, true); tabs[next].focus();
+    hold('user', true); show(next); tabs[next].focus();
   });
-  chips.forEach((c, n) => c.addEventListener('click', () => { auto = false; demo.style.setProperty('--progress', '100%'); ask(n); }));
-  demo.addEventListener('pointerenter', () => { if (auto) started = performance.now() - DWELL * 0.5; });
-
-  const loop = (now) => {
-    if (auto && visible) {
-      const p = Math.min(1, (now - started) / DWELL);
-      demo.style.setProperty('--progress', `${p * 100}%`);
-      if (p >= 1) show((current + 1) % tabs.length, false);
-    }
-    requestAnimationFrame(loop);
-  };
+  chips.forEach((c, n) => c.addEventListener('click', () => { hold('user', true); ask(n, true); }));
+  toggle?.addEventListener('click', () => hold('user', !holds.has('user')));
+  for (const t of tabs) t.querySelector('.bar').addEventListener('animationend', () => {
+    if (!holds.has('user')) show((current + 1) % tabs.length);
+  });
+  demo.addEventListener('pointerenter', () => hold('pointer', true));
+  demo.addEventListener('pointerleave', () => hold('pointer', false));
+  demo.addEventListener('focusin', () => hold('focus', true));
+  demo.addEventListener('focusout', (e) => { if (!demo.contains(e.relatedTarget)) hold('focus', false); });
   new IntersectionObserver(([entry]) => {
-    const was = visible;
-    visible = entry.isIntersecting;
-    if (visible && !was && !started) show(0, false);
+    hold('offscreen', !entry.isIntersecting);
+    if (entry.isIntersecting && !started) { started = true; show(0); }
   }, { threshold: 0.35 }).observe(demo);
-  if (!reduced) requestAnimationFrame(loop);
+  sync();
 }
 
-// Brand tile: the same catalog in three customers' colours.
+// Brand tile: the same catalog in three customers' colours, only while it is on screen.
 const brand = document.querySelector('.vb-app');
 if (brand && !reduced) {
   const BRANDS = [['Acme Catalog', 'acme', '#3d8fdb'], ['Nordhavn Pumps', 'nordhavn', '#2a9d8f'], ['Brightline Machines', 'brightline', '#e07a3f']];
-  let b = 0;
-  setInterval(() => {
+  let b = 0, timer = 0, visible = false;
+  const step = () => {
     b = (b + 1) % BRANDS.length;
     const [name, slug, colour] = BRANDS[b];
     brand.closest('.viz-brand').style.setProperty('--brand', colour);
     brand.querySelector('.vb-name').textContent = name;
     brand.querySelector('.vb-url').textContent = `${slug}.alloycatalog.com`;
     brand.classList.remove('swap'); void brand.offsetWidth; brand.classList.add('swap');
-  }, 2800);
+  };
+  const run = () => {
+    const on = visible && !document.hidden;
+    if (on && !timer) timer = setInterval(step, 2800);
+    if (!on && timer) { clearInterval(timer); timer = 0; }
+  };
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; run(); }).observe(brand);
+  document.addEventListener('visibilitychange', run);
 }
+
+// Decorative animations pause while their section is off-screen or the tab is hidden.
+const idle = new IntersectionObserver((entries) => {
+  for (const entry of entries) entry.target.classList.toggle('idle', !entry.isIntersecting);
+});
+for (const section of document.querySelectorAll('main > section')) idle.observe(section);
+document.addEventListener('visibilitychange', () => document.documentElement.classList.toggle('tab-hidden', document.hidden));
+
+// Mobile menu closes after a link is chosen.
+const menu = document.querySelector('.menu');
+menu?.addEventListener('click', (event) => { if (event.target.closest('a')) menu.open = false; });
 
 // Tiles: a soft light follows the pointer.
 for (const card of document.querySelectorAll('.tile')) {

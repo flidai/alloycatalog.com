@@ -22,6 +22,8 @@ export default function (config) {
     return `${path}?v=${hash}`;
   });
 
+  config.addFilter("isoDate", (date) => new Date(date).toISOString().slice(0, 10));
+
   config.addGlobalData("isBuild", process.env.ELEVENTY_RUN_MODE === "build");
 
   return {

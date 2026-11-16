@@ -7,6 +7,9 @@
 {%- endif %}
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+{%- if robots %}
+  <meta name="robots" content="{{ robots }}">
+{%- endif %}
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
@@ -23,8 +26,14 @@
   <link rel="preload" href="/assets/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/site.css' | v }}">
   <script src="{{ '/assets/site.js' | v }}" defer></script>
+{%- if page.url == "/" %}
+  <script type="application/ld+json">
+  {{ structuredData | dump | safe }}
+  </script>
+{%- endif %}
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="/" aria-label="Alloy Catalog home">
@@ -35,16 +44,27 @@
         <a href="{{ "" if page.url == "/" else "/" }}{{ item.href }}">{{ item.label }}</a>
 {%- endfor %}
       </nav>
+      <details class="menu">
+        <summary>Menu</summary>
+        <nav aria-label="Main">
+{%- for item in site.nav %}
+          <a href="{{ "" if page.url == "/" else "/" }}{{ item.href }}">{{ item.label }}</a>
+{%- endfor %}
+        </nav>
+      </details>
       <a class="btn btn-primary btn-sm" href="{{ derived.demoHref }}">Book a demo</a>
     </div>
   </header>
 
-{{ content | safe }}
+  <main id="main">
+{{ content | safe }}  </main>
+
   <footer class="footer">
     <div class="wrap footer-inner">
       <img src="/brand/lockup-on-dark.svg" alt="Alloy Catalog" width="138" height="24">
       <p>A product by <a href="https://flid.ai">Flid</a>. © {{ derived.year }} Flid.</p>
       <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      <p><a href="/privacy/">Privacy</a> · <a href="/company/">Company</a></p>
     </div>
   </footer>
 </body>

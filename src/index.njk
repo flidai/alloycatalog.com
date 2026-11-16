@@ -5,7 +5,6 @@ description: "Alloy Catalog connects to Autodesk Vault and your ERP and fuses mo
 ogTitle: "Alloy Catalog: every part, every source, one catalog"
 ogDescription: "Engineering master data with a built-in AI agent. CAD, drawings, BOM and ERP fused into one page per part number."
 ---
-  <main>
     <section class="hero scene">
       <div class="background" aria-hidden="true">
         <div class="grid-intro"></div>
@@ -96,6 +95,7 @@ ogDescription: "Engineering master data with a built-in AI agent. CAD, drawings,
             <div class="mock-bar">
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
               <span class="mock-url">acme.alloycatalog.com/search?q=housing</span>
+              <button type="button" class="demo-toggle" aria-pressed="false">Pause tour</button>
             </div>
 
             <div class="panel" id="p-find" role="tabpanel" aria-labelledby="t-find">
@@ -125,9 +125,9 @@ ogDescription: "Engineering master data with a built-in AI agent. CAD, drawings,
 
             <div class="panel" id="p-ask" role="tabpanel" aria-labelledby="t-ask" hidden>
               <div class="ask-ui">
-                <div class="thread" aria-live="polite">
+                <div class="thread">
                   <p class="bubble you">Which assemblies use AC-40120?</p>
-                  <p class="bubble ai">AC-40120 is used in three assemblies: <span class="nw">Gearbox 40 kW <a class="cite">1</a></span>, <span class="nw">Gearbox 55 kW <a class="cite">2</a></span> and the complete <span class="nw">drive unit <a class="cite">3</a></span>. The ERP shows <span class="nw">14 in stock <a class="cite">4</a></span>.</p>
+                  <p class="bubble ai">AC-40120 is used in three assemblies: <span class="nw">Gearbox 40 kW <span class="cite">1</span></span>, <span class="nw">Gearbox 55 kW <span class="cite">2</span></span> and the complete <span class="nw">drive unit <span class="cite">3</span></span>. The ERP shows <span class="nw">14 in stock <span class="cite">4</span></span>.</p>
                 </div>
                 <div class="qchips">
                   <button type="button" data-q="0">Which assemblies use AC-40120?</button>
@@ -250,7 +250,7 @@ ogDescription: "Engineering master data with a built-in AI agent. CAD, drawings,
           </article>
           <article class="tile span-2" data-reveal>
             <div class="viz viz-cite" aria-hidden="true">
-              <p>Used in three assemblies <a class="cite">1</a> <a class="cite">2</a> <a class="cite">3</a></p>
+              <p>Used in three assemblies <span class="cite">1</span> <span class="cite">2</span> <span class="cite">3</span></p>
             </div>
             <h3>Answers you can check</h3>
             <p>The AI agent links every part and document it mentions, so people trust the answer.</p>
@@ -420,4 +420,3 @@ ogDescription: "Engineering master data with a built-in AI agent. CAD, drawings,
         <a class="btn btn-primary btn-lg" href="{{ derived.demoHref }}">Book a demo <span aria-hidden="true">→</span></a>
       </div>
     </section>
-  </main>
