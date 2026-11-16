@@ -1,0 +1,23 @@
+{
+  "name": "Alloy Catalog",
+  "url": "https://alloycatalog.com",
+  "domain": "alloycatalog.com",
+  "email": "jacob@flid.ai",
+  "bookingUrl": null,
+  "themeColor": "#06121f",
+  "company": {
+    "legalName": "Flid AI ApS",
+    "cvr": "43463217",
+    "city": "Odense",
+    "country": "Denmark",
+    "countryCode": "DK",
+    "url": "https://flid.ai"
+  },
+  "nav": [
+    { "href": "#product", "label": "Product" },
+    { "href": "#why", "label": "Why Alloy" },
+    { "href": "#how", "label": "How it works" },
+    { "href": "#trust", "label": "Security" },
+    { "href": "#pilot", "label": "Pilot" }
+  ]
+}

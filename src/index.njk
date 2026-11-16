@@ -1,45 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alloy Catalog: engineering master data with a built-in AI agent</title>
-  <meta name="description" content="Alloy Catalog connects to Autodesk Vault and your ERP and fuses models, drawings, BOMs and stock into one page per part number, with an AI agent that answers questions about your products and cites its sources.">
-  <link rel="canonical" href="https://alloycatalog.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://alloycatalog.com/">
-  <meta property="og:title" content="Alloy Catalog: every part, every source, one catalog">
-  <meta property="og:description" content="Engineering master data with a built-in AI agent. CAD, drawings, BOM and ERP fused into one page per part number.">
-  <meta property="og:image" content="https://alloycatalog.com/assets/og.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#06121f">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css">
-  <script>document.documentElement.classList.add("js")</script>
-  <script src="/assets/site.js" defer></script>
-</head>
-<body>
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <a class="brand" href="/" aria-label="Alloy Catalog home">
-        <img src="/brand/lockup-on-dark.svg" alt="Alloy Catalog" width="172" height="30">
-      </a>
-      <nav class="nav-links" aria-label="Main">
-        <a href="#product">Product</a>
-        <a href="#why">Why Alloy</a>
-        <a href="#how">How it works</a>
-        <a href="#trust">Security</a>
-        <a href="#pilot">Pilot</a>
-      </nav>
-      <a class="btn btn-primary btn-sm" href="mailto:jacob@flid.ai?subject=Alloy%20Catalog%20demo">Book a demo</a>
-    </div>
-  </header>
-
+---
+layout: base.njk
+title: "Alloy Catalog: engineering master data with a built-in AI agent"
+description: "Alloy Catalog connects to Autodesk Vault and your ERP and fuses models, drawings, BOMs and stock into one page per part number, with an AI agent that answers questions about your products and cites its sources."
+ogTitle: "Alloy Catalog: every part, every source, one catalog"
+ogDescription: "Engineering master data with a built-in AI agent. CAD, drawings, BOM and ERP fused into one page per part number."
+---
   <main>
     <section class="hero scene">
       <div class="background" aria-hidden="true">
@@ -111,7 +76,7 @@
         <h1><span class="line">Every part.</span> <span class="line">Every source.</span> <span class="line shine">One catalog.</span></h1>
         <p class="lead">Alloy Catalog connects to Autodesk Vault and your ERP, and fuses models, drawings, bills of materials and stock into one page per part number. Its AI agent answers questions about your products and cites the files and records it used.</p>
         <div class="cta-row">
-          <a class="btn btn-primary btn-lg" href="mailto:jacob@flid.ai?subject=Alloy%20Catalog%20demo">See it on your data <span aria-hidden="true">→</span></a>
+          <a class="btn btn-primary btn-lg" href="{{ derived.demoHref }}">See it on your data <span aria-hidden="true">→</span></a>
           <a class="btn btn-ghost btn-lg" href="#how">How it works</a>
         </div>
       </div>
@@ -452,17 +417,7 @@
       <div class="wrap cta-inner" data-reveal>
         <h2>See your own parts in <span class="shine">Alloy Catalog</span></h2>
         <p>Book a 30-minute demo. If it fits, we start a four-week pilot on your own data.</p>
-        <a class="btn btn-primary btn-lg" href="mailto:jacob@flid.ai?subject=Alloy%20Catalog%20demo">Book a demo <span aria-hidden="true">→</span></a>
+        <a class="btn btn-primary btn-lg" href="{{ derived.demoHref }}">Book a demo <span aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>
-
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <img src="/brand/lockup-on-dark.svg" alt="Alloy Catalog" width="138" height="24">
-      <p>A product by <a href="https://flid.ai">Flid</a>. © 2026 Flid.</p>
-      <p><a href="mailto:jacob@flid.ai">jacob@flid.ai</a></p>
-    </div>
-  </footer>
-</body>
-</html>
