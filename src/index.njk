@@ -1,46 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alloy Catalog: engineering master data with a built-in AI agent</title>
-  <meta name="description" content="Alloy Catalog connects to Autodesk Vault and your ERP and fuses models, drawings, BOMs and stock into one page per part number, with an AI agent that answers questions about your products and cites its sources.">
-  <link rel="canonical" href="https://alloycatalog.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://alloycatalog.com/">
-  <meta property="og:title" content="Alloy Catalog: every part, every source, one catalog">
-  <meta property="og:description" content="Engineering master data with a built-in AI agent. CAD, drawings, BOM and ERP fused into one page per part number.">
-  <meta property="og:image" content="https://alloycatalog.com/assets/og.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#06121f">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css">
-  <script>document.documentElement.classList.add("js")</script>
-  <script src="/assets/site.js" defer></script>
-</head>
-<body>
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <a class="brand" href="/" aria-label="Alloy Catalog home">
-        <img src="/brand/lockup-on-dark.svg" alt="Alloy Catalog" width="172" height="30">
-      </a>
-      <nav class="nav-links" aria-label="Main">
-        <a href="#product">Product</a>
-        <a href="#why">Why Alloy</a>
-        <a href="#how">How it works</a>
-        <a href="#trust">Security</a>
-        <a href="#pilot">Pilot</a>
-      </nav>
-      <a class="btn btn-primary btn-sm" href="mailto:jacob@flid.ai?subject=Alloy%20Catalog%20demo">Book a demo</a>
-    </div>
-  </header>
-
-  <main>
+---
+layout: base.njk
+title: "Alloy Catalog: engineering master data with a built-in AI agent"
+description: "Alloy Catalog connects to Autodesk Vault and your ERP and fuses models, drawings, BOMs and stock into one page per part number, with an AI agent that answers questions about your products and cites its sources."
+ogTitle: "Alloy Catalog: every part, every source, one catalog"
+ogDescription: "Engineering master data with a built-in AI agent. CAD, drawings, BOM and ERP fused into one page per part number."
+---
     <section class="hero scene">
       <div class="background" aria-hidden="true">
         <div class="grid-intro"></div>
@@ -106,12 +70,12 @@
         </div>
       </div>
       <div class="wrap hero-copy">
-        <svg class="grain-mark hero-mark assemble" viewBox="0 0 100 100" aria-hidden="true"><polygon class="g c1" style="--dx:12.6px;--dy:-19.5px;--i:0" points="51.6,12.5 53.3,35.0 69.7,40.4 82.2,30.2"/><polygon class="g c3" style="--dx:21.0px;--dy:0.7px;--i:1" points="54.9,38.4 67.0,60.9 83.2,67.9 83.2,33.0 70.3,43.6"/><polygon class="g c2" style="--dx:-11.5px;--dy:-17.9px;--i:2" points="17.7,30.3 34.2,46.2 50.5,35.3 48.8,12.3"/><polygon class="g c4" style="--dx:0.3px;--dy:3.2px;--i:5" points="36.0,48.4 50.4,68.2 64.1,61.4 51.5,38.0"/><polygon class="g c3" style="--dx:-19.6px;--dy:8.2px;--i:3" points="16.8,33.3 16.8,69.2 30.1,76.5 47.8,69.4 32.9,48.9"/><polygon class="g c2" style="--dx:6.6px;--dy:23.0px;--i:4" points="33.1,78.3 50.0,88.4 81.5,70.2 66.0,63.5 50.6,71.3"/></svg>
+        <svg class="grain-mark hero-mark assemble" viewBox="0 0 100 100" aria-hidden="true"><polygon class="g c1" points="51.6,12.5 53.3,35.0 69.7,40.4 82.2,30.2"/><polygon class="g c3" points="54.9,38.4 67.0,60.9 83.2,67.9 83.2,33.0 70.3,43.6"/><polygon class="g c2" points="17.7,30.3 34.2,46.2 50.5,35.3 48.8,12.3"/><polygon class="g c4" points="36.0,48.4 50.4,68.2 64.1,61.4 51.5,38.0"/><polygon class="g c3" points="16.8,33.3 16.8,69.2 30.1,76.5 47.8,69.4 32.9,48.9"/><polygon class="g c2" points="33.1,78.3 50.0,88.4 81.5,70.2 66.0,63.5 50.6,71.3"/></svg>
         <p class="pill"><span class="pill-dot"></span>Engineering master data with a built-in AI agent</p>
         <h1><span class="line">Every part.</span> <span class="line">Every source.</span> <span class="line shine">One catalog.</span></h1>
         <p class="lead">Alloy Catalog connects to Autodesk Vault and your ERP, and fuses models, drawings, bills of materials and stock into one page per part number. Its AI agent answers questions about your products and cites the files and records it used.</p>
         <div class="cta-row">
-          <a class="btn btn-primary btn-lg" href="mailto:jacob@flid.ai?subject=Alloy%20Catalog%20demo">See it on your data <span aria-hidden="true">→</span></a>
+          <a class="btn btn-primary btn-lg" href="{{ derived.demoHref }}">See it on your data <span aria-hidden="true">→</span></a>
           <a class="btn btn-ghost btn-lg" href="#how">How it works</a>
         </div>
       </div>
@@ -122,15 +86,16 @@
       <div class="wrap">
         <div class="demo" data-demo>
           <div class="demo-tabs" role="tablist" aria-label="Product tour">
-            <button role="tab" id="t-find" aria-controls="p-find" aria-selected="true" data-url="acme.alloycatalog.com/search?q=housing"><span class="mono">01</span>Find a part<i class="bar"></i></button>
-            <button role="tab" id="t-ask" aria-controls="p-ask" aria-selected="false" tabindex="-1" data-url="acme.alloycatalog.com/ask"><span class="mono">02</span>Ask a question<i class="bar"></i></button>
-            <button role="tab" id="t-item" aria-controls="p-item" aria-selected="false" tabindex="-1" data-url="acme.alloycatalog.com/item/AC-40120"><span class="mono">03</span>See everything about it<i class="bar"></i></button>
-            <button role="tab" id="t-clean" aria-controls="p-clean" aria-selected="false" tabindex="-1" data-url="acme.alloycatalog.com/classes/housings"><span class="mono">04</span>Clean up master data<i class="bar"></i></button>
+            <button type="button" role="tab" id="t-find" aria-controls="p-find" aria-selected="true" data-url="acme.alloycatalog.com/search?q=housing"><span class="mono">01</span>Find a part<i class="bar"></i></button>
+            <button type="button" role="tab" id="t-ask" aria-controls="p-ask" aria-selected="false" tabindex="-1" data-url="acme.alloycatalog.com/ask"><span class="mono">02</span>Ask a question<i class="bar"></i></button>
+            <button type="button" role="tab" id="t-item" aria-controls="p-item" aria-selected="false" tabindex="-1" data-url="acme.alloycatalog.com/item/AC-40120"><span class="mono">03</span>See everything about it<i class="bar"></i></button>
+            <button type="button" role="tab" id="t-clean" aria-controls="p-clean" aria-selected="false" tabindex="-1" data-url="acme.alloycatalog.com/classes/housings"><span class="mono">04</span>Clean up master data<i class="bar"></i></button>
           </div>
           <figure class="mock">
             <div class="mock-bar">
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
               <span class="mock-url">acme.alloycatalog.com/search?q=housing</span>
+              <button type="button" class="demo-toggle">Pause tour</button>
             </div>
 
             <div class="panel" id="p-find" role="tabpanel" aria-labelledby="t-find">
@@ -160,9 +125,9 @@
 
             <div class="panel" id="p-ask" role="tabpanel" aria-labelledby="t-ask" hidden>
               <div class="ask-ui">
-                <div class="thread" aria-live="polite">
+                <div class="thread">
                   <p class="bubble you">Which assemblies use AC-40120?</p>
-                  <p class="bubble ai">AC-40120 is used in three assemblies: <span class="nw">Gearbox 40 kW <a class="cite">1</a></span>, <span class="nw">Gearbox 55 kW <a class="cite">2</a></span> and the complete <span class="nw">drive unit <a class="cite">3</a></span>. The ERP shows <span class="nw">14 in stock <a class="cite">4</a></span>.</p>
+                  <p class="bubble ai">AC-40120 is used in three assemblies: <span class="nw">Gearbox 40 kW <span class="cite">1</span></span>, <span class="nw">Gearbox 55 kW <span class="cite">2</span></span> and the complete <span class="nw">drive unit <span class="cite">3</span></span>. The ERP shows <span class="nw">14 in stock <span class="cite">4</span></span>.</p>
                 </div>
                 <div class="qchips">
                   <button type="button" data-q="0">Which assemblies use AC-40120?</button>
@@ -203,9 +168,9 @@
                 <div class="mock-side">
                   <p class="side-h">Similar parts</p>
                   <ul class="similar">
-                    <li><span>AC-40122 · 55 kW variant</span><b style="--p:94%">94%</b></li>
-                    <li><span>AC-40130 · Bearing housing</span><b style="--p:81%">81%</b></li>
-                    <li><span>AC-40118 · Old revision</span><b style="--p:76%">76%</b></li>
+                    <li><span>AC-40122 · 55 kW variant</span><b data-p="94">94%</b></li>
+                    <li><span>AC-40130 · Bearing housing</span><b data-p="81">81%</b></li>
+                    <li><span>AC-40118 · Old revision</span><b data-p="76">76%</b></li>
                   </ul>
                   <p class="side-h">Who knows this part</p>
                   <ul class="people">
@@ -231,11 +196,11 @@
                 <div class="attrs">
                   <p class="side-h">Housings · how complete is the data?</p>
                   <ul class="bars">
-                    <li><span>Material</span><b style="--p:100%"><i></i></b><em>100%</em></li>
-                    <li><span>Mass</span><b style="--p:98%"><i></i></b><em>98%</em></li>
-                    <li><span>Bore diameter</span><b style="--p:86%"><i></i></b><em>86%</em></li>
-                    <li><span>Mounting pattern</span><b style="--p:71%"><i></i></b><em>71%</em></li>
-                    <li><span>Surface treatment</span><b style="--p:54%"><i></i></b><em>54%</em></li>
+                    <li><span>Material</span><b data-p="100"><i></i></b><em>100%</em></li>
+                    <li><span>Mass</span><b data-p="98"><i></i></b><em>98%</em></li>
+                    <li><span>Bore diameter</span><b data-p="86"><i></i></b><em>86%</em></li>
+                    <li><span>Mounting pattern</span><b data-p="71"><i></i></b><em>71%</em></li>
+                    <li><span>Surface treatment</span><b data-p="54"><i></i></b><em>54%</em></li>
                   </ul>
                   <p class="muted small">Filled automatically from models, drawings and the ERP wherever the data allows. Every value shows where it came from.</p>
                 </div>
@@ -285,7 +250,7 @@
           </article>
           <article class="tile span-2" data-reveal>
             <div class="viz viz-cite" aria-hidden="true">
-              <p>Used in three assemblies <a class="cite">1</a> <a class="cite">2</a> <a class="cite">3</a></p>
+              <p>Used in three assemblies <span class="cite">1</span> <span class="cite">2</span> <span class="cite">3</span></p>
             </div>
             <h3>Answers you can check</h3>
             <p>The AI agent links every part and document it mentions, so people trust the answer.</p>
@@ -300,7 +265,7 @@
           </article>
           <article class="tile span-2" data-reveal>
             <div class="viz viz-clean" aria-hidden="true">
-              <span style="--p:100%"></span><span style="--p:86%"></span><span style="--p:71%"></span><span style="--p:92%"></span>
+              <span data-p="100"></span><span data-p="86"></span><span data-p="71"></span><span data-p="92"></span>
             </div>
             <h3>Master data you can trust</h3>
             <p>Every part classified, with its key attributes filled and the source of every value shown.</p>
@@ -357,7 +322,7 @@
             <path d="M0 40 C 150 40, 150 120, 300 120"/><path d="M0 120 L 300 120"/><path d="M0 200 C 150 200, 150 120, 300 120"/>
             <path class="pulse" d="M0 40 C 150 40, 150 120, 300 120"/><path class="pulse p2" d="M0 120 L 300 120"/><path class="pulse p3" d="M0 200 C 150 200, 150 120, 300 120"/>
           </svg>
-          <div class="core"><svg class="grain-mark fuse-mark" viewBox="0 0 100 100"><polygon class="g c1" style="--dx:12.6px;--dy:-19.5px;--i:0" points="51.6,12.5 53.3,35.0 69.7,40.4 82.2,30.2"/><polygon class="g c3" style="--dx:21.0px;--dy:0.7px;--i:1" points="54.9,38.4 67.0,60.9 83.2,67.9 83.2,33.0 70.3,43.6"/><polygon class="g c2" style="--dx:-11.5px;--dy:-17.9px;--i:2" points="17.7,30.3 34.2,46.2 50.5,35.3 48.8,12.3"/><polygon class="g c4" style="--dx:0.3px;--dy:3.2px;--i:5" points="36.0,48.4 50.4,68.2 64.1,61.4 51.5,38.0"/><polygon class="g c3" style="--dx:-19.6px;--dy:8.2px;--i:3" points="16.8,33.3 16.8,69.2 30.1,76.5 47.8,69.4 32.9,48.9"/><polygon class="g c2" style="--dx:6.6px;--dy:23.0px;--i:4" points="33.1,78.3 50.0,88.4 81.5,70.2 66.0,63.5 50.6,71.3"/></svg></div>
+          <div class="core"><svg class="grain-mark fuse-mark" viewBox="0 0 100 100"><polygon class="g c1" points="51.6,12.5 53.3,35.0 69.7,40.4 82.2,30.2"/><polygon class="g c3" points="54.9,38.4 67.0,60.9 83.2,67.9 83.2,33.0 70.3,43.6"/><polygon class="g c2" points="17.7,30.3 34.2,46.2 50.5,35.3 48.8,12.3"/><polygon class="g c4" points="36.0,48.4 50.4,68.2 64.1,61.4 51.5,38.0"/><polygon class="g c3" points="16.8,33.3 16.8,69.2 30.1,76.5 47.8,69.4 32.9,48.9"/><polygon class="g c2" points="33.1,78.3 50.0,88.4 81.5,70.2 66.0,63.5 50.6,71.3"/></svg></div>
           <svg class="flows out" viewBox="0 0 300 240" preserveAspectRatio="none"><path d="M0 120 L 300 120"/><path class="pulse p4" d="M0 120 L 300 120"/></svg>
           <div class="record">
             <p class="mono muted small">AC-40120</p>
@@ -385,7 +350,7 @@
           </div>
           <div class="wires" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
           <div class="layer layer-core">
-            <svg class="grain-mark layer-mark" viewBox="0 0 100 100" aria-hidden="true"><polygon class="g c1" style="--dx:12.6px;--dy:-19.5px;--i:0" points="51.6,12.5 53.3,35.0 69.7,40.4 82.2,30.2"/><polygon class="g c3" style="--dx:21.0px;--dy:0.7px;--i:1" points="54.9,38.4 67.0,60.9 83.2,67.9 83.2,33.0 70.3,43.6"/><polygon class="g c2" style="--dx:-11.5px;--dy:-17.9px;--i:2" points="17.7,30.3 34.2,46.2 50.5,35.3 48.8,12.3"/><polygon class="g c4" style="--dx:0.3px;--dy:3.2px;--i:5" points="36.0,48.4 50.4,68.2 64.1,61.4 51.5,38.0"/><polygon class="g c3" style="--dx:-19.6px;--dy:8.2px;--i:3" points="16.8,33.3 16.8,69.2 30.1,76.5 47.8,69.4 32.9,48.9"/><polygon class="g c2" style="--dx:6.6px;--dy:23.0px;--i:4" points="33.1,78.3 50.0,88.4 81.5,70.2 66.0,63.5 50.6,71.3"/></svg>
+            <svg class="grain-mark layer-mark" viewBox="0 0 100 100" aria-hidden="true"><polygon class="g c1" points="51.6,12.5 53.3,35.0 69.7,40.4 82.2,30.2"/><polygon class="g c3" points="54.9,38.4 67.0,60.9 83.2,67.9 83.2,33.0 70.3,43.6"/><polygon class="g c2" points="17.7,30.3 34.2,46.2 50.5,35.3 48.8,12.3"/><polygon class="g c4" points="36.0,48.4 50.4,68.2 64.1,61.4 51.5,38.0"/><polygon class="g c3" points="16.8,33.3 16.8,69.2 30.1,76.5 47.8,69.4 32.9,48.9"/><polygon class="g c2" points="33.1,78.3 50.0,88.4 81.5,70.2 66.0,63.5 50.6,71.3"/></svg>
             <div>
               <p class="layer-title">Alloy Catalog</p>
               <div class="layer-items"><span>Item master</span><span>Where-used and BOM</span><span>Classification</span><span>Search</span><span>AI agent</span><span>API</span></div>
@@ -452,17 +417,6 @@
       <div class="wrap cta-inner" data-reveal>
         <h2>See your own parts in <span class="shine">Alloy Catalog</span></h2>
         <p>Book a 30-minute demo. If it fits, we start a four-week pilot on your own data.</p>
-        <a class="btn btn-primary btn-lg" href="mailto:jacob@flid.ai?subject=Alloy%20Catalog%20demo">Book a demo <span aria-hidden="true">→</span></a>
+        <a class="btn btn-primary btn-lg" href="{{ derived.demoHref }}">Book a demo <span aria-hidden="true">→</span></a>
       </div>
     </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <img src="/brand/lockup-on-dark.svg" alt="Alloy Catalog" width="138" height="24">
-      <p>A product by <a href="https://flid.ai">Flid</a>. © 2026 Flid.</p>
-      <p><a href="mailto:jacob@flid.ai">jacob@flid.ai</a></p>
-    </div>
-  </footer>
-</body>
-</html>

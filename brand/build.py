@@ -4,14 +4,23 @@ The mark is an "A" made of two materials. Where they overlap the colour
 deepens: the alloy. Text is outlined from IBM Plex Sans so the SVGs render
 identically everywhere.
 
-Usage: FONT_DIR=<dir with IBMPlexSans-*.ttf> python brand/build.py
+Colours come from brand/tokens.json; fonts from the self-hosted IBM Plex
+files in src/assets/fonts (woff2, so fontTools needs brotli).
+
+Usage: pip install fonttools brotli && python brand/build.py
+Then run npm run brand to render og.png from og.svg.
 """
+import json
 import os
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.ttLib import TTFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-FONTS = os.environ["FONT_DIR"]
+FONTS = os.environ.get("FONT_DIR", os.path.join(HERE, "..", "src", "assets", "fonts"))
+FONT_FILES = {
+    "IBMPlexSans-Regular.ttf": "ibm-plex-sans-latin-400-normal.woff2",
+    "IBMPlexSans-SemiBold.ttf": "ibm-plex-sans-latin-600-normal.woff2",
+}
 
 # Geometry on a 100x100 grid: a hexagon cut into metal grains, the
 # microstructure of an alloy. Gaps are masked out so the mark works on any
@@ -26,10 +35,8 @@ GRAINS = [
     ("30,78 50,70 66,62 84.64,70 50,90", "c2"),
 ]
 
-THEMES = {
-    "light": {"c1": "#7fb6ee", "c2": "#3f8ad0", "c3": "#0c60a3", "c4": "#082f52", "word": "#18181b", "sub": "#52525b"},
-    "dark": {"c1": "#cfe5fb", "c2": "#7fb6ee", "c3": "#3d8fdb", "c4": "#f2f7fd", "word": "#fafafa", "sub": "#a1a1aa"},
-}
+with open(os.path.join(HERE, "tokens.json")) as f:
+    THEMES = json.load(f)["brand"]
 
 
 def mark(t, uid, gap=2.6, classes=False):
@@ -42,7 +49,10 @@ def mark(t, uid, gap=2.6, classes=False):
 
 
 def text_path(word, font_file, size, x, baseline, fill):
-    font = TTFont(os.path.join(FONTS, font_file))
+    path = os.path.join(FONTS, font_file)
+    if not os.path.exists(path):
+        path = os.path.join(FONTS, FONT_FILES[font_file])
+    font = TTFont(path)
     gs, cmap = font.getGlyphSet(), font.getBestCmap()
     scale = size / font["head"].unitsPerEm
     out, cursor = [], 0
@@ -84,17 +94,17 @@ write("favicon.svg", svg(100, 100, f"<style>{css}@media (prefers-color-scheme:da
                          + mark(light, "f", gap=4.5, classes=True), "Alloy Catalog"))
 print("ok")
 
-# Social card 1200x630 (light), outlined text only.
-t = THEMES["light"]
+# Social card 1200x630, dark like the site, outlined text only.
+t = THEMES["dark"]
 size = 64
 alloy, w1 = text_path("Alloy", "IBMPlexSans-SemiBold.ttf", size, 0, 0, t["word"])
 catalog, w2 = text_path("Catalog", "IBMPlexSans-Regular.ttf", size, w1 + 16, 0, t["sub"])
 line1, _ = text_path("Every part. Every source.", "IBMPlexSans-SemiBold.ttf", 76, 0, 0, t["word"])
-line2, _ = text_path("One catalog.", "IBMPlexSans-SemiBold.ttf", 76, 0, 0, t["c3"])
+line2, _ = text_path("One catalog.", "IBMPlexSans-SemiBold.ttf", 76, 0, 0, t["c2"])
 sub, _ = text_path("Engineering master data with a built-in AI agent", "IBMPlexSans-Regular.ttf", 34, 0, 0, t["sub"])
 write("og.svg", svg(1200, 630,
-    '<rect width="1200" height="630" fill="#fafafa"/>'
-    '<rect x="0" y="618" width="1200" height="12" fill="#0c60a3"/>'
+    f'<rect width="1200" height="630" fill="{t["background"]}"/>'
+    f'<rect x="0" y="618" width="1200" height="12" fill="{t["c3"]}"/>'
     f'<g transform="translate(80 80) scale(0.9)">{mark(t, "og")}</g>'
     f'<g transform="translate(196 138)">{alloy}{catalog}</g>'
     f'<g transform="translate(80 350)">{line1}</g>'
