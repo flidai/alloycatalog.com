@@ -15,7 +15,7 @@ function watchErrors(page) {
 
 for (const path of PAGES) {
   for (const width of WIDTHS) {
-    test(`${path} at ${width}px: no errors, no overflow, no serious axe issues`, async ({ page }, info) => {
+    test(`${path} at ${width}px: no errors, no overflow, no serious axe issues`, async ({ page }) => {
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.setViewportSize({ width, height: 900 });
       const errors = watchErrors(page);
@@ -30,8 +30,6 @@ for (const path of PAGES) {
       const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
       const serious = violations.filter((v) => ["serious", "critical"].includes(v.impact));
       expect(serious.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`)).toEqual([]);
-
-      await page.screenshot({ path: info.outputPath(`${path.replace(/\W+/g, "-")}${width}.png`), fullPage: true });
     });
   }
 }

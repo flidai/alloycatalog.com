@@ -46,7 +46,7 @@ button and the footer follow it.
   - no serious accessibility issues (axe);
   - the product tour and mobile menu work.
 
-Screenshots are kept as a build artifact.
+When a test fails, its Playwright trace is kept as a build artifact.
 
 ## Brand
 
